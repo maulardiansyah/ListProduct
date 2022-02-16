@@ -9,7 +9,7 @@ target 'ListProduct' do
 
   pod 'Kingfisher' 
   pod 'SkeletonView'
-  pod 'Alamofire', '~> 5.4'
+  pod 'Alamofire', '5.0'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'Toast-Swift', '~> 5.0.1'
 
