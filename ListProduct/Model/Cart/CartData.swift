@@ -90,7 +90,10 @@ class CartData: CoreDataBrain {
         let currentCart = getCartItem()
         let itemCart = currentCart.filter({ $0.id == id })
         guard itemCart.count > 0 else { return }
-        itemCart[0].totalPcs += 1
+        let itemTemp = itemCart[0]
+        var pcs = itemTemp.totalPcs
+        pcs += 1
+        itemTemp.setValue(pcs, forKey: "totalPcs")
         saveData()
     }
     
@@ -98,12 +101,14 @@ class CartData: CoreDataBrain {
         let currentCart = getCartItem()
         guard index < currentCart.count else { return }
         let itemCart = currentCart[index]
-        itemCart.totalPcs += Int32(totalPcs)
+        var pcs = itemCart.totalPcs
+        pcs += Int32(totalPcs)
+        itemCart.setValue(pcs, forKey: "totalPcs")
         saveData()
     }
     
     //MARK: - Check is already on cart
-    func getCheckIsOnFav(id: String) -> Bool {
+    func getCheckIsOnCart(id: String) -> Bool {
         let currentCart = getCartItem()
         let stateContains = currentCart.contains(where: { $0.id == id } )
         return stateContains
@@ -115,6 +120,13 @@ class CartData: CoreDataBrain {
         let itemCart = currentCart.filter({ $0.id == id })
         guard itemCart.count > 0 else { return }
         context.delete(currentCart[0])
+        saveData()
+    }
+    
+    func deleteItemCart(index: Int) {
+        let currentCart = getCartItem()
+        guard index < currentCart.count else { return }
+        context.delete(currentCart[index])
         saveData()
     }
 }

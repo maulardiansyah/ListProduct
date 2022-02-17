@@ -35,22 +35,14 @@ struct CartDataViewModel {
         return Int(cartItem.totalPcs)
     }
     
-    var totalWeight: String {
+    var itemWeight: String {
         let weightTemp = cartItem.eachWeight
         let weightPerKg = weightTemp / 100.0
-        let totalWeight = weightPerKg * Double(itemPcs)
-        return "\(totalWeight.roundToDecimal(1)) Kg"
+        return "\(weightPerKg.roundToDecimal(1)) Kg"
     }
     
-    var totalPriceString: String {
+    var priceString: String {
         let priceTemp = Int(cartItem.eachPrice)
-        let totalPrice = priceTemp * itemPcs
-        return "Rp \(totalPrice.toCurrency())"
-    }
-    
-    var totalPrice: Int {
-        let priceTemp = Int(cartItem.eachPrice)
-        let totalPrice = priceTemp * itemPcs
-        return totalPrice
+        return "Rp \(priceTemp.toCurrency())"
     }
 }

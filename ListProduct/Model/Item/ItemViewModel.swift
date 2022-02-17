@@ -58,6 +58,8 @@ struct ItemViewModel {
     }
     
     var itemCondition: String {
-        return "(\(item.itemCondition?.conditionName ?? ""))"
+        let conditionTemp = item.itemCondition?.conditionName ?? ""
+        guard conditionTemp != "" else { return "" }
+        return "(\(conditionTemp))"
     }
 }

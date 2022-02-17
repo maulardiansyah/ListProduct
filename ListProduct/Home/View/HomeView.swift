@@ -48,6 +48,7 @@ class HomeView: BaseVC {
     }()
     
     var viewModels: HomeViewModel = HomeViewModel()
+    var cartViewModel: CartViewModel = CartViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +93,11 @@ class HomeView: BaseVC {
         populateItem()
     }
     
+    /// Right navigation button preessed
+    override func rightButtonPressed(sender: UIBarButtonItem) {
+        toNext(vc: CartView())
+    }
+    
     //MARK: - Populate Data
     func populateItem() {
         isLoading = true
@@ -109,7 +115,6 @@ class HomeView: BaseVC {
             self?.collectionViewListItem.reloadData()
         }
     }
-    
 }
 
 //MARK: - Collection Data
@@ -126,7 +131,7 @@ extension HomeView: SkeletonCollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionItemId, for: indexPath) as? ItemCollectionCell else {
-            fatalError("Cannot found cell id")
+            fatalError("Cannot found cell")
         }
         cell.item = viewModels.viewModelItem(indexPath.item)
         return cell

@@ -22,14 +22,6 @@ extension UIView {
         self.makeToast(message, duration: duration, position: position, style: style)
     }
     
-    /// To make specifix radius on view
-    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
-    }
-    
     /// To add shadow of view
     func addShadow(location: VerticalLocation, color: UIColor = .black.withAlphaComponent(0.1), opacity: Float = 1, radius: CGFloat = 5.0, height: Int = -10) {
         switch location {

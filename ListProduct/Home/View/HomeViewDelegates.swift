@@ -11,6 +11,7 @@ import UIKit
 extension HomeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModels.viewModelItem(indexPath.item)
+        cartViewModel.addToCart(item: item)
         view.showToast("\(item?.title ?? "") added item to cart")
     }
 }
