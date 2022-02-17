@@ -8,6 +8,12 @@
 import UIKit
 import Toast_Swift
 
+/// Enum location added shadow
+enum VerticalLocation: String {
+    case bottom
+    case top
+}
+
 extension UIView {
     /// To show toast view
     func showToast(_ message: String, duration: TimeInterval = 2.0, position: ToastPosition = .bottom, bgColor: UIColor = UIColor.black.withAlphaComponent(0.8)) {
@@ -16,7 +22,24 @@ extension UIView {
         self.makeToast(message, duration: duration, position: position, style: style)
     }
     
+    /// To make specifix radius on view
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+    
     /// To add shadow of view
+    func addShadow(location: VerticalLocation, color: UIColor = .black.withAlphaComponent(0.1), opacity: Float = 1, radius: CGFloat = 5.0, height: Int = -10) {
+        switch location {
+        case .bottom:
+            addShadow(offset: CGSize(width: 0, height: 10), color: color, opacity: opacity, radius: radius)
+        case .top:
+            addShadow(offset: CGSize(width: 0, height: height), color: color, opacity: opacity, radius: radius)
+        }
+    }
+    
     func addShadow(offset: CGSize, color: UIColor = .black, opacity: Float = 0.5, radius: CGFloat = 5.0) {
         self.layer.masksToBounds = false
         self.layer.shadowColor = color.cgColor

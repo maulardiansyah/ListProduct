@@ -15,6 +15,9 @@ extension UIColor {
     class public var gray: UIColor { UIColor.UIColorRGB(rgbValue: 0x666666) }
     class public var grayStroke: UIColor { UIColor.UIColorRGB(rgbValue: 0xE2E7FF) }
     
+    class public var softGreen: UIColor { UIColor.UIColorRGB(rgbValue: 0x4BAAB9) }
+    class public var softRed: UIColor { UIColor.UIColorRGB(rgbValue: 0xED6B66) }
+    
     /// Set color using hex RGB value
     class func UIColorRGB(rgbValue: UInt) -> UIColor {
         return UIColor(

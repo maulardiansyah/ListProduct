@@ -9,22 +9,30 @@ import Foundation
 
 struct CartDataViewModel {
     
-    private var cartItem: CartData
+    private var cartItem: CartItem
     
-    init(_ cartItem: CartData) {
+    init(_ cartItem: CartItem) {
         self.cartItem = cartItem
     }
     
     var itemId: String {
-        return cartItem.itemId
+        return cartItem.id ?? ""
     }
     
-    var itemDetail: ItemViewModel {
-        return cartItem.item
+    var itemName: String {
+        return cartItem.itemName ?? ""
+    }
+    
+    var itemCondition: String {
+        return cartItem.itemCondition ?? ""
+    }
+    
+    var imagePath: String {
+        return cartItem.imagePath ?? ""
     }
     
     var itemPcs: Int {
-        return cartItem.itemPcs
+        return Int(cartItem.totalPcs)
     }
     
     var totalWeight: String {
@@ -35,13 +43,13 @@ struct CartDataViewModel {
     }
     
     var totalPriceString: String {
-        let priceTemp = cartItem.eachPrice
+        let priceTemp = Int(cartItem.eachPrice)
         let totalPrice = priceTemp * itemPcs
         return "Rp \(totalPrice.toCurrency())"
     }
     
     var totalPrice: Int {
-        let priceTemp = cartItem.eachPrice
+        let priceTemp = Int(cartItem.eachPrice)
         let totalPrice = priceTemp * itemPcs
         return totalPrice
     }
