@@ -19,8 +19,7 @@ class Network {
     
     class func request(_ service: Services, completion: @escaping (_ data: Data?, _ error: String?) -> ()) {
         let url =  baseUrl + service.path
-        let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) //to allow spacing for search
-        AF.request(urlString ?? "", method: service.method, encoding: URLEncoding.queryString)
+        AF.request(url, method: service.method, encoding: URLEncoding.queryString)
             .responseJSON { res in
                 printResponse(service, res)
                 switch res.result {

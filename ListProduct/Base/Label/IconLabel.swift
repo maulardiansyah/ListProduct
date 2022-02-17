@@ -20,7 +20,6 @@ class IconLabel: UIView {
         let label = UILabel()
         label.font = FontStyle.body(.small).font
         label.textColor = .gray
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -37,7 +36,7 @@ class IconLabel: UIView {
         backgroundColor = .clear
         [iconLabel, labelName].forEach { addSubview($0) }
         
-        addConstraintsWithFormat(format: "H:|[v0(16)-4-[v1]]|", views: iconLabel, labelName)
+        addConstraintsWithFormat(format: "H:|[v0(16)]-4-[v1]|", views: iconLabel, labelName)
         addConstraintsWithFormat(format: "V:|[v0(16)]|", views: iconLabel)
         addConstraintsWithFormat(format: "V:|[v0]|", views: labelName)
     }

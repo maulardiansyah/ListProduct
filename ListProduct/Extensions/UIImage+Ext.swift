@@ -20,4 +20,5 @@ extension UIImage {
     
     /// Image
     class var imgHalal: UIImage? { return UIImage(named: "Halal") }
+    class var imgPlaceholder: UIImage? { return UIImage(named: "ImagePlaceholder") }
 }

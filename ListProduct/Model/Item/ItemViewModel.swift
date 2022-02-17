@@ -27,8 +27,14 @@ struct ItemViewModel {
         return Int(item.price ?? "0") ?? 0
     }
     
+    var priceString: String {
+        guard price > 0 else { return "Gratis" }
+        return "Rp " + price.toCurrency()
+    }
+    
     var location: String {
-        return item.location ?? "-"
+        let locationTemp = item.location ?? ""
+        return locationTemp == "" ? "-" : locationTemp
     }
     
     var username: String {

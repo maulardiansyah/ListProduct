@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class ItemCollectionCell: UICollectionViewCell {
     
@@ -13,6 +14,7 @@ class ItemCollectionCell: UICollectionViewCell {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill
         img.isSkeletonable = true
+        img.image = .imgPlaceholder
         return img
     }()
     
@@ -70,8 +72,8 @@ class ItemCollectionCell: UICollectionViewCell {
         let img = UIImageView()
         img.image = .imgHalal
         img.contentMode = .scaleAspectFit
-        img.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        img.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        img.widthAnchor.constraint(equalToConstant: 28).isActive = true
+        img.heightAnchor.constraint(equalToConstant: 28).isActive = true
         img.isHidden = true
         return img
     }()
@@ -99,11 +101,25 @@ class ItemCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var item: ItemViewModel? {
+        didSet {
+            lblItemName.text = item?.title
+            lblItemPrice.text = item?.priceString
+            locationLabel.labelName.text = item?.location
+            userLabel.labelName.text = item?.username
+            
+            let isHalal = item?.isHalal ?? false
+            imgHalal.isHidden = isHalal ? false : true
+            
+            imgItem.setImage(item?.imagePath ?? "", placeholder: .imgPlaceholder)
+        }
+    }
+    
     // MARK: - Setup View
     private func setupViews() {
         
         [imgItem, svContentLabel, containerBottom].forEach { contentView.addSubview($0) }
-        contentView.addConstraintsWithFormat(format: "V:|[v0(120)-12-[v1]-4-[v2]-12-|", views: imgItem, svContentLabel, containerBottom)
+        contentView.addConstraintsWithFormat(format: "V:|[v0(120)]-12-[v1]-4-[v2]-12-|", views: imgItem, svContentLabel, containerBottom)
         contentView.addConstraintsWithFormat(format: "H:|[v0]|", views: imgItem)
         [svContentLabel, containerBottom].forEach { contentView.addConstraintsWithFormat(format: "H:|-[v0]-|", views: $0) }
         
@@ -115,13 +131,15 @@ class ItemCollectionCell: UICollectionViewCell {
         containerImage.addConstraintsWithFormat(format: "H:|[v0]|", views: svImageHalal)
         
         [userLabel, badgeItem, containerImage].forEach { containerBottom.addSubview($0) }
-        [userLabel, badgeItem].forEach { containerBottom.addConstraintsWithFormat(format: "H:|[V0]->=10-[V1]|", views: $0, containerImage) }
+        [userLabel, badgeItem].forEach { containerBottom.addConstraintsWithFormat(format: "H:|[v0]->=10-[v1]|", views: $0, containerImage) }
         containerBottom.addConstraintsWithFormat(format: "V:|[v0]->=0-|", views: containerImage)
         containerBottom.addConstraintsWithFormat(format: "V:|[v0]-[v1]->=0-|", views: userLabel, badgeItem)
         
         contentView.layer.borderWidth = 0.8
         contentView.layer.borderColor = UIColor.grayStroke.cgColor
         contentView.layer.cornerRadius = 8
+        contentView.isSkeletonable = true
         contentView.layer.masksToBounds = true
+        contentView.backgroundColor = .white
     }
 }

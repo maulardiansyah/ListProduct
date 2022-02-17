@@ -24,9 +24,9 @@ class BadgeLabel: UILabel {
     
     override var intrinsicContentSize: CGSize {
         let originalContentSize = super.intrinsicContentSize
-        let height = originalContentSize.height + 4
+        let height = originalContentSize.height + 12
         layer.cornerRadius = 4
         layer.masksToBounds = true
-        return CGSize(width: originalContentSize.width + 8, height: height)
+        return CGSize(width: originalContentSize.width + 16, height: height)
     }
 }

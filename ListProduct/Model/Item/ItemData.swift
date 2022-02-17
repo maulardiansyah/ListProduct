@@ -31,7 +31,7 @@ struct ImageItem: Codable {
     let imagePath: String?
     
     private enum CodingKeys : String, CodingKey {
-        case imagePath = "image_path"
+        case imagePath = "img_path"
     }
 }
 
