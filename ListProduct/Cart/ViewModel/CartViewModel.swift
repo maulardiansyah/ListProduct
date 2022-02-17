@@ -12,7 +12,6 @@ class CartViewModel {
     private var cartItems = [CartItem]()
     
     var fetchedCartItem: SelectionClosure?
-    var showWarnDelete: SelectionClosure?
 
     var numberOfCartItem: Int {
         cartItems.count
@@ -45,18 +44,9 @@ class CartViewModel {
         if action == .plus {
             CartData.instance.updateCart(index: index, totalPcs: 1)
         } else {
-            guard cartItems[index].totalPcs > 1 else {
-                showWarnDelete?()
-                return
-            }
+            guard cartItems[index].totalPcs > 1 else { return }
             CartData.instance.updateCart(index: index, totalPcs: -1)
         }
-    }
-    
-    func deleteItemcart(index: Int) {
-        guard index < cartItems.count else { return }
-        cartItems.remove(at: index)
-        CartData.instance.deleteItemCart(index: index)
     }
     
     // MARK: - Add To Cart

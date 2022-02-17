@@ -110,7 +110,11 @@ class CartItemCell: UITableViewCell {
             lblItemPrice.text = itemCart?.priceString
             lblItemCondition.text = itemCart?.itemCondition
             lblWeight.text = itemCart?.itemWeight
-            lblItemPcs.text = "\(itemCart?.itemPcs ?? 0)"
+            
+            let itemPcs = itemCart?.itemPcs ?? 1
+            lblItemPcs.text = "\(itemPcs)"
+            btnMinus.isEnabled = itemPcs > 1 ? true : false
+            btnMinus.tintColor = itemPcs > 1 ? .softRed : .gray
             
             imgItem.setImage(itemCart?.imagePath ?? "", placeholder: .imgPlaceholder)
         }

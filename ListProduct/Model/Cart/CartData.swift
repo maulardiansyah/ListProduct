@@ -113,20 +113,4 @@ class CartData: CoreDataBrain {
         let stateContains = currentCart.contains(where: { $0.id == id } )
         return stateContains
     }
-    
-    //MARK: - Delete
-    func deleteItemCart(id: String) {
-        let currentCart = getCartItem()
-        let itemCart = currentCart.filter({ $0.id == id })
-        guard itemCart.count > 0 else { return }
-        context.delete(currentCart[0])
-        saveData()
-    }
-    
-    func deleteItemCart(index: Int) {
-        let currentCart = getCartItem()
-        guard index < currentCart.count else { return }
-        context.delete(currentCart[index])
-        saveData()
-    }
 }
